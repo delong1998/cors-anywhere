@@ -9,6 +9,7 @@ RUN apk add --no-cache git && \
     npm config set registry https://registry.npmmirror.com && \
     npm install 
 
+
 FROM node:14-alpine
 
 WORKDIR /app
