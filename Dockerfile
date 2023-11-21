@@ -1,5 +1,5 @@
 # 使用 Alpine 为基础镜像，该镜像体积较小
-FROM node:14-alpine
+FROM node:14-alpine as builder
 
 WORKDIR /app
 
