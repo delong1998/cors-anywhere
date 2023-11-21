@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x, 16.x, 18.x]
+        node-version: [16]
 
     
     steps:
@@ -22,12 +22,16 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - name: installnpm
-      run: npm install
+        
+    - name:  install dependencies # 第二步，安装依赖
+      run: npm install --legacy-peer-deps # 忽视依赖冲突,继续安装（不覆盖之前）
+      
     - name: build image
       run:  docker build . --file Dockerfile --tag registry.cn-qingdao.aliyuncs.com/delong1998/cors:dev
+      
     - name: push docker image
       run: docker push registry.cn-qingdao.aliyuncs.com/delong1998/cors:dev
+      
     - name: docker logout
       run: docker logout registry.cn-qingdao.aliyuncs.com
            
